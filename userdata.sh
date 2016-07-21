@@ -19,7 +19,7 @@ wget https://install.sandstorm.io/ -O install.sh
 
 # Temporary hack to use port 80 if there's a HTTPS bringup issue. I need to upstream
 # this fix into install.sh.
-sed -i 's,DEFAULT_PORT=6080,DEFAULT_PORT=80,' install.sh
+sed -i 's,    PORT=6080,    PORT=80,' install.sh
 CHOSEN_INSTALL_MODE=1 REPORT=no HOME=/root \
   SANDCATS_DOMAIN_RESERVATION_TOKEN="${SANDCATS_DOMAIN_RESERVATION_TOKEN}" \
   DESIRED_SANDCATS_NAME="${DESIRED_SANDCATS_NAME}" \
