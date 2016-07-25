@@ -35,7 +35,7 @@ sed -i s,'{{REPLACE_ME_DESIRED_SANDCATS_NAME}}',"$DESIRED_SANDCATS_NAME", userda
 openstack server create --image Ubuntu-14.04 --flavor gp1.semisonic --security-group default --key-name slittingmill --user-data userdata.sh "$DESIRED_SANDCATS_NAME"
 
 # Loop until it's running...
-echo -n "Waiting for server to come online... (up to 30 seconds)"
+echo -n "Waiting for server to boot.. (up to 30 seconds)"
 for i in $(seq 0 30) ; do
   if openstack server show "$DESIRED_SANDCATS_NAME" | grep -q 'address.*public=' ; then
     break
