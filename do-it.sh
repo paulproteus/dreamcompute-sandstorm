@@ -49,11 +49,13 @@ echo ''
 IP_ADDRESS="$(openstack server list --name="${DESIRED_SANDCATS_NAME}" -f json | jq '.[0].Networks' | awk '{print $2}' | sed 's,",,g')"
 echo "Server booted with IP address: $IP_ADDRESS"
 
+SUCCESSFULLY_BOUND_TO_PORT="no"
 # Print an admin token URL once it is fully online.
 echo -n "Waiting for Sandstorm install to complete... (up to 120 seconds)"
 for i in $(seq 0 120) ; do
   if nc -z -w 1 "$IP_ADDRESS" 80 ; then
     echo "Server online! Access it at: http://${DESIRED_SANDCATS_NAME}.sandcats-dev.sandstorm.io/admin/setup-token/${ADMIN_TOKEN}"
+    SUCCESSFULLY_BOUND_TO_PORT="yes"
     break
   else
     echo -n "."
@@ -61,3 +63,7 @@ for i in $(seq 0 120) ; do
   fi
 done
 echo ''
+
+if [ "$SUCCESSFULLY_BOUND_TO_PORT" = "no" ] ; then
+  echo "*** WARNING: Your server failed to start properly. Contact support."
+fi
