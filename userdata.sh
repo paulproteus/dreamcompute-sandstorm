@@ -15,11 +15,8 @@ DESIRED_SANDCATS_NAME="{{REPLACE_ME_DESIRED_SANDCATS_NAME}}"
 ADMIN_TOKEN="{{REPLACE_ME_ADMIN_TOKEN}}"
 
 cd $(mktemp -d sandstorm-installer.XXXXXXXXXXXX)
-wget https://install.sandstorm.io/ -O install.sh
+wget https://raw.githubusercontent.com/sandstorm-io/sandstorm/master/install.sh -O install.sh
 
-# Temporary hack to use port 80 if there's a HTTPS bringup issue. I need to upstream
-# this fix into install.sh.
-sed -i 's,    PORT="6080",    PORT="80",' install.sh
 CHOSEN_INSTALL_MODE=1 REPORT=no HOME=/root \
   SANDCATS_DOMAIN_RESERVATION_TOKEN="${SANDCATS_DOMAIN_RESERVATION_TOKEN}" \
   DESIRED_SANDCATS_NAME="${DESIRED_SANDCATS_NAME}" \
