@@ -54,7 +54,7 @@ SUCCESSFULLY_BOUND_TO_PORT="no"
 echo -n "Waiting for Sandstorm install to complete... (up to 120 seconds)"
 for i in $(seq 0 120) ; do
   if nc -z -w 1 "$IP_ADDRESS" 80 ; then
-    echo "Server online! Access it at: http://${DESIRED_SANDCATS_NAME}.sandcats-dev.sandstorm.io/admin/setup-token/${ADMIN_TOKEN}"
+    echo "Server online! Access it at: http://${DESIRED_SANDCATS_NAME}.sandcats-dev.sandstorm.io/setup/token/${ADMIN_TOKEN}"
     SUCCESSFULLY_BOUND_TO_PORT="yes"
     break
   else
