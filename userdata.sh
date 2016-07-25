@@ -25,7 +25,7 @@ CHOSEN_INSTALL_MODE=1 REPORT=no HOME=/root \
   OVERRIDE_SANDCATS_BASE_DOMAIN=sandcats-dev.sandstorm.io \
   OVERRIDE_SANDCATS_API_BASE=https://sandcats-dev-machine.sandstorm.io \
   OVERRIDE_SANDCATS_CURL_PARAMS=-k \
-  bash install.sh -d
+  bash install.sh -d -p 80
 
 # To be decided:
 #

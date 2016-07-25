@@ -47,6 +47,17 @@ echo ''
 
 # Find out its IP address
 IP_ADDRESS="$(openstack server list --name="${DESIRED_SANDCATS_NAME}" -f json | jq '.[0].Networks' | awk '{print $2}' | sed 's,",,g')"
+echo "Server booted with IP address: $IP_ADDRESS"
 
-echo "$IP_ADDRESS"
-# TODO: Repeat the above in a busy-loop.
+# Print an admin token URL once it is fully online.
+echo -n "Waiting for Sandstorm install to complete... (up to 120 seconds)"
+for i in $(seq 0 120) ; do
+  if nc -z -w 1 "$IP_ADDRESS" 80 ; then
+    echo "Server online! Access it at: http://${DESIRED_SANDCATS_NAME}.sandcats-dev.sandstorm.io/admin/setup-token/${ADMIN_TOKEN}"
+    break
+  else
+    echo -n "."
+    sleep 1
+  fi
+done
+echo ''
